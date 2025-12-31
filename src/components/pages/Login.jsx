@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { ImFacebook, ImGoogle } from "react-icons/im";
 import Cookies from "js-cookie";
-import AdminApi from "../../services/adminApi";
-
-
+import AdminServices from "../../services/adminServices";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,7 +12,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const res = await AdminApi.loginAdmin({
+      const res = await AdminServices.loginAdmin({
         email,
         password,
       });

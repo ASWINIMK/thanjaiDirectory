@@ -1,42 +1,42 @@
-import requests from "./httpService";
+import requests from "./httpServices";
 
-const AdminApi = {
+const AdminServices = {
 
-  // ✅ LOGIN
+  //  LOGIN
   loginAdmin: async (body) => {
     return requests.post("/admin/login", body);
   },
 
-  // ✅ REGISTER
+  //  REGISTER
   registerAdmin: async (body) => {
     return requests.post("/admin/register", body);
   },
 
-  // ✅ DASHBOARD STATS
+  //  DASHBOARD STATS
   getDashboardStats: async () => {
     return requests.get("/admin/dashboard");
   },
 
-  // ✅ ALL BUSINESSES
+  //  ALL BUSINESSES
   getAllBusinesses: async () => {
     return requests.get("/admin/businesses");
   },
 
-  // ✅ PENDING BUSINESSES
+  //  PENDING BUSINESSES
   getPendingBusinesses: async () => {
     return requests.get("/admin/businesses/pending");
   },
 
-  // ✅ APPROVE BUSINESS
+  //  APPROVE BUSINESS
   approveBusiness: async (id) => {
     return requests.put(`/admin/business/${id}/approve`);
   },
 
-  // ✅ REJECT BUSINESS
+  //  REJECT BUSINESS
   rejectBusiness: async (id) => {
     return requests.put(`/admin/business/${id}/reject`);
   },
 
 };
 
-export default AdminApi;
+export default AdminServices;
