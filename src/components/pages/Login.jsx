@@ -1,8 +1,38 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { ImFacebook, ImGoogle } from "react-icons/im";
+import Cookies from "js-cookie";
+import AdminApi from "../../services/adminApi";
+
+
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const res = await AdminApi.loginAdmin({
+        email,
+        password,
+      });
+
+      // save token
+      Cookies.set(
+        "adminInfo",
+        JSON.stringify({
+          token: res.token,
+          role: res.role,
+        })
+      );
+
+      navigate("/dashboard");
+    } catch (err) {
+      alert(err.response?.data?.message || "Login failed");
+    }
+  };
   return (
     <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
       <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
@@ -29,28 +59,35 @@ const Login = () => {
               <label className="block text-sm mb-2 text-gray-700 dark:text-gray-400">
                 Email
               </label>
-              <input
-                type="email"
-                placeholder="john@doe.com"
-                className="w-full px-4 py-3 mb-4 text-sm border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
-              />
 
-              {/* PASSWORD */}
-              <label className="block text-sm mb-2 text-gray-700 dark:text-gray-400">
-                Password
-              </label>
               <input
-                type="password"
-                placeholder="************"
-                className="w-full px-4 py-3 mb-4 text-sm border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
-              />
+  type="email"
+  placeholder="john@doe.com"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  className="w-full px-4 py-3 mb-4 text-sm border rounded-lg"
+/>
+<label className="block text-sm mb-2 text-gray-700 dark:text-gray-400">
+                password
+              </label>
+
+<input
+  type="password"
+  placeholder="************"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+  className="w-full px-4 py-3 mb-4 text-sm border rounded-lg"
+/>
+
 
               {/* LOGIN BUTTON */}
-              <Link to="/dashboard">
-              <button className="w-full h-12 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold transition">
-                Login
-              </button>
-              </Link>
+              <button
+  onClick={handleLogin}
+  className="w-full h-12 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold transition"
+>
+  Login
+</button>
+
 
               <hr className="my-8" />
 
