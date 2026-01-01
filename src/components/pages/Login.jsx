@@ -16,13 +16,16 @@ const Login = () => {
         email,
         password,
       });
+       console.log("FULL RESPONSE:", res);
+    console.log("BACKEND DATA:", res.data); 
+      
 
       // save token
       Cookies.set(
         "adminInfo",
         JSON.stringify({
-          token: res.token,
-          role: res.role,
+          token: res.data.token,
+          role: res.data.role,
         })
       );
 
