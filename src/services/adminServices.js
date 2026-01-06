@@ -19,12 +19,12 @@ const AdminServices = {
 
   //  ALL BUSINESSES
   getAllBusinesses: async () => {
-    return requests.get("/admin/businesses");
+    return requests.get("/admin/business");``
   },
 
   //  PENDING BUSINESSES
   getPendingBusinesses: async () => {
-    return requests.get("/admin/businesses/pending");
+    return requests.get("/admin/business/pending");
   },
 
   //  APPROVE BUSINESS

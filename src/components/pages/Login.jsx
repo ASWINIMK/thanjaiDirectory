@@ -21,13 +21,7 @@ const Login = () => {
       
 
       // save token
-      Cookies.set(
-        "adminInfo",
-        JSON.stringify({
-          token: res.data.token,
-          role: res.data.role,
-        })
-      );
+     localStorage.setItem("token", res.data.token);
 
       navigate("/dashboard");
     } catch (err) {
