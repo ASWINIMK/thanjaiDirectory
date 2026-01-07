@@ -37,6 +37,10 @@ const AdminServices = {
     return requests.put(`/admin/business/${id}/reject`);
   },
 
+  blockBusiness: (id) => {
+    return requests.put(`/admin/business/${id}/block`);
+  },
+
 };
 
 export default AdminServices;
